@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TACEP Center - VALENTOR HOLDINGS</title>
+    <style>
+        :root {
+            --orange: #FF4500;
+            --strong-orange: #FF6B00;
+            --sky-blue: #87CEEB;
+            --strong-sky-blue: #00BFFF;
+            --deep-blue: #4682B4;
+            --black: #1a1a1a;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--black);
+            background: var(--white);
+            min-height: 100vh;
+            position: relative;
+            transition: background 0.5s ease;
+        }
+
+        /* Clean white background with subtle accent lines */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--orange) 0%, var(--sky-blue) 100%);
+            z-index: 1000;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--sky-blue) 0%, var(--orange) 100%);
+            z-index: 1000;
+        }
+
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .header {
+            background: var(--white);
+            color: var(--black);
+            text-align: center;
+            padding: 20px;
+            border-radius: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--orange);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--orange) 0%, var(--sky-blue) 100%);
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--sky-blue) 0%, var(--orange) 100%);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: var(--black);
+            font-weight: bold;
+        }
+
+        .digital-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--orange), var(--sky-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: pulse 3s ease-in-out infinite;
+            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+        }
+
+        .digital-logo::before {
+            content: '';
+            position: absolute;
+            width: 85%;
+            height: 85%;
+            background: var(--white);
+            border-radius: 50%;
+        }
+
+        .digital-logo::after {
+            content: '🎓💻';
+            position: absolute;
+            font-size: 1.5em;
+            z-index: 3;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .nav-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .nav-btn {
+            padding: 20px;
+            background: var(--white);
+            color: var(--black);
+            border: 2px solid var(--orange);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            border: 2px solid var(--sky-blue);
+            background: linear-gradient(135deg, var(--orange), var(--sky-blue));
+            color: var(--white);
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 30px;
+            left: 20px;
+            padding: 15px 25px;
+            background: var(--white);
+            color: var(--black);
+            border: 2px solid var(--orange);
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, var(--orange), var(--sky-blue));
+            color: var(--white);
+        }
+
+        .content-card {
+            background: var(--white);
+            padding: 35px;
+            border-radius: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border: 2px solid var(--sky-blue);
+        }
+
+        .login-container {
+            max-width: 500px;
+            margin: 50px auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border: 2px solid var(--orange);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--black);
+            font-size: 1.1em;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--sky-blue);
+            border-radius: 15px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--orange);
+            box-shadow: 0 0 10px rgba(255, 107, 0, 0.2);
+            transform: scale(1.02);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--orange), var(--sky-blue));
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, var(--sky-blue), var(--orange));
+        }
+
+        .toggle-btn {
+            background: var(--white);
+            color: var(--black);
+            border: 2px solid var(--orange);
+        }
+
+        .toggle-btn.active {
+            background: linear-gradient(135deg, var(--orange), var(--sky-blue));
+            color: white;
+        }
+
+        .notification {
+            position: fixed;
+            top: 50px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--orange), var(--sky-blue));
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            display: none;
+            z-index: 1000;
+            animation: slideInRight 0.5s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            max-width: 300px;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .course-card {
+            background: var(--white);
+            color: var(--black);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 2px solid var(--orange);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--orange), var(--sky-blue));
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            border-color: var(--sky-blue);
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .stat-card {
+            background: var(--white);
+            color: var(--black);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 2px solid var(--sky-blue);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--sky-blue), var(--orange));
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            border-color: var(--orange);
+        }
+
+        .kabiru-info-box {
+            background: linear-gradient(135deg, var(--orange), var(--sky-blue));
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .payment-notice {
+            background: var(--white);
+            color: var(--black);
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 2px solid var(--orange);
+        }
+
+        .referral-levels {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--sky-blue);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .digital-logo {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .nav-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="login-page" class="page active">
+        <div class="container">
+            <div class="login-container">
+                <div class="header" style="margin-bottom: 30px;">
+                    <div class="header-content">
+                        <div>
+                            <h1>TACEP EDUCATION SERVICES</h1>
+                            <p style="font-size: 1.1em; margin-bottom: 15px; line-height: 1.4; text-align: center;">Welcome to TACEP Initiative, a one-stop platform for your education needs. You can learn skills with us to excellence or connect to external institutions.</p>
+                            <p style="font-size: 1em; margin-bottom: 10px; text-align: center;">New to this platform? Sign up/create account and enjoy our Jobs/Task education platform.</p>
+                            <p style="font-size: 0.9em; text-align: center;">For how to complete tasks and earn Kabiru points, read the Task/Job documentation in the Kabiru app.</p>
+                            <div style="margin-top: 15px;">
+                                <button onclick="window.open('https://magero1985.github.io/Kabiru-Mining-Portal-/', '_blank')" style="background: linear-gradient(45deg, #FFD700, #FF6B35); color: white; border: none; padding: 12px 20px; border-radius: 25px; font-weight: bold; cursor: pointer; margin: 5px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                                    ⛏️ Access Kabiru Mining App
+                                </button>
+                            </div>
+                        </div>
+                        <div class="digital-logo"></div>
+                    </div>
+                </div>
+
+                <!-- Login/Registration Toggle -->
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <button type="button" id="showLoginBtn" class="btn toggle-btn active" style="width: 48%; margin-right: 2%;">Login</button>
+                    <button type="button" id="showRegisterBtn" class="btn toggle-btn" style="width: 48%;">Create Account</button>
+                </div>
+
+                <!-- Login Form -->
+                <form id="loginForm">
+                    <h2 style="text-align: center; margin-bottom: 30px; color: var(--black);">Welcome Back!</h2>
+                    
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="loginEmail" name="email" required placeholder="Enter your registered email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="loginPassword" name="password" required placeholder="Enter your password">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Account Type</label>
+                        <select name="accountType" required>
+                            <option value="">Select Account Type</option>
+                            <option value="student">Student Account</option>
+                            <option value="teacher">Teacher Account</option>
+                            <option value="investor">Investor Account</option>
+                            <option value="admin">Administrator</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn">🚀 Login to Dashboard</button>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <p style="margin-top: 10px;"><a href="#" onclick="forgotPassword()" style="color: var(--sky-blue); text-decoration: none;">Forgot Password?</a></p>
+                    </div>
+                </form>
+
+                <!-- Registration Form -->
+                <form id="registerForm" style="display: none;">
+                    <h2 style="text-align: center; margin-bottom: 30px; color: var(--black);">Create Your Account</h2>
+                    
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="registerFullName" name="fullName" required placeholder="Enter your full name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="registerEmail" name="email" required placeholder="Enter your email address">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="registerPhone" name="phone" required placeholder="Enter your phone number">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Create Password</label>
+                        <input type="password" id="registerPassword" name="password" required placeholder="Create a strong password" minlength="6">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password" minlength="6">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Account Type</label>
+                        <select id="registerAccountType" name="accountType" required>
+                            <option value="">Select Account Type</option>
+                            <option value="student">Student Account - Learn & Earn Kabiru Points</option>
+                            <option value="teacher">Teacher Account - Teach & Build Network</option>
+                            <option value="investor">Investor Account - Sponsor & Track Impact</option>
+                        </select>
+                    </div>
+
+                    <!-- Additional fields based on account type -->
+                    <div id="studentFields" style="display: none;">
+                        <div class="form-group">
+                            <label>Learning Mode</label>
+                            <select name="learningMode">
+                                <option value="">Select Mode</option>
+                                <option value="online">Online Courses</option>
+                                <option value="physical">Physical Classes</option>
+                                <option value="hybrid">Hybrid (Online + Physical)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Country</label>
+                            <select name="country">
+                                <option value="">Select Country</option>
+                                <option value="kenya">Kenya</option>
+                                <option value="uganda">Uganda</option>
+                                <option value="tanzania">Tanzania</option>
+                                <option value="ethiopia">Ethiopia</option>
+                                <option value="rwanda">Rwanda</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="teacherFields" style="display: none;">
+                        <div class="form-group">
+                            <label>Teaching Experience (Years)</label>
+                            <input type="number" name="experience" min="0" placeholder="Years of teaching experience">
+                        </div>
+                        <div class="form-group">
+                            <label>Specialization Area</label>
+                            <select name="specialization">
+                                <option value="">Select Specialization</option>
+                                <option value="programming">Computer Programming</option>
+                                <option value="electronics">Electronics & Electrical</option>
+                                <option value="textile">Textile & Tailoring</option>
+                                <option value="music">Music Instruments</option>
+                                <option value="carpentry">Carpentry & Woodwork</option>
+                                <option value="finance">Finance, Law & Banking</option>
+                                <option value="pastry">Pastry & Baking</option>
+                                <option value="health">Natural Health</option>
+                                <option value="mechanical">Mechanical & Welding</option>
+                                <option value="beauty">Beauty & Therapy</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="investorFields" style="display: none;">
+                        <div class="form-group">
+                            <label>Investor Type</label>
+                            <select name="investorType">
+                                <option value="">Select Investor Type</option>
+                                <option value="individual">Individual Investor</option>
+                                <option value="corporate">Corporate Sponsor</option>
+                                <option value="foundation">Foundation/NGO</option>
+                                <option value="government">Government Agency</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Investment Interest Level</label>
+                            <select name="investmentAmount">
+                                <option value="">Select Investment Range</option>
+                                <option value="bronze">Bronze Sponsor: $500 - $2,499</option>
+                                <option value="silver">Silver Partner: $2,500 - $9,999</option>
+                                <option value="gold">Gold Benefactor: $10,000 - $24,999</option>
+                                <option value="platinum">Platinum Patron: $25,000 - $99,999</option>
+                                <option value="diamond">Diamond Visionary: $100,000+</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Referral Code (Optional)</label>
+                        <input type="text" name="referralCode" placeholder="Enter referral code to earn bonus Kabiru points">
+                    </div>
+                    
+                    <button type="submit" class="btn">🎉 Create Account & Get Kabiru Points</button>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <p style="font-size: 0.9em; color: var(--black);">By creating an account, you agree to our Terms of Service and Privacy Policy</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Page -->
+    <div id="main-page" class="page">
+        <button class="back-btn" onclick="showPage('login-page')" style="display: none;">🏠 Back to Login</button>
+        
+        <div class="container">
+            <header class="header">
+                <div class="header-content">
+                    <div>
+                        <h1>TACEP EDUCATION SERVICES</h1>
+                        <p style="font-size: 1.2em; margin-bottom: 15px; line-height: 1.4; text-align: center;">Welcome to TACEP Initiative, a one-stop platform for your education needs. You can learn skills with us to excellence or connect to external institutions.</p>
+                        <p style="font-size: 1.1em; margin-bottom: 10px; text-align: center;">New to this platform? Sign up/create account and enjoy our Jobs/Task education platform.</p>
+                        <p style="font-size: 1em; margin-bottom: 15px; text-align: center;">For how to complete tasks and earn Kabiru points, read the Task/Job documentation in the Kabiru app.</p>
+                        <p style="font-size: 1.1em; text-align: center;">📍 Spine Road, KC Market, Eastland Nairobi | NiTA Registered Training Center</p>
+                        <div style="margin-top: 20px;">
+                            <button onclick="window.open('https://magero1985.github.io/Kabiru-Mining-Portal-/', '_blank')" style="background: linear-gradient(45deg, #FFD700, #FF6B35); color: white; border: none; padding: 15px 25px; border-radius: 25px; font-weight: bold; cursor: pointer; margin: 5px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); font-size: 16px;">
+                                ⛏️ Access Kabiru Mining App
+                            </button>
+                        </div>
+                    </div>
+                    <div class="digital-logo"></div>
+                </div>
+            </header>
+
+            <div class="payment-notice">
+                <h3>💰 Payment & Digital Currency Information</h3>
+                <p><strong>Important:</strong> This platform accepts fiat payments (KSH) to Valentor Company Ltd for all products and services.</p>
+                <p><strong>Kabiru Digital Currency:</strong> Earn and use Kabiru points through our mining system for courses and services.</p>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="showPage('courses-page')">
+                    📚 Available Courses<br>
+                    <small>Explore All Training Programs</small>
+                </button>
+                <button class="nav-btn" onclick="showPage('student-dashboard-page')">
+                    📊 Student Dashboard<br>
+                    <small>Access Your Learning Portal</small>
+                </button>
+                <button class="nav-btn" onclick="showPage('teacher-dashboard-page')">
+                    👩‍🏫 Teacher Dashboard<br>
+                    <small>Manage Students & Materials</small>
+                </button>
+                <button class="nav-btn" onclick="showPage('investor-dashboard-page')">
+                    💰 Investor Dashboard<br>
+                    <small>Monitor Investments & Impact</small>
+                </button>
+                <button class="nav-btn" onclick="showPage('library-page')">
+                    📖 Public Library<br>
+                    <small>Access Learning Resources</small>
+                </button>
+                <button class="nav-btn" onclick="showPage('referral-page')">
+                    🔗 Referral System<br>
+                    <small>Your Main Online Business</small>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Courses Page -->
+    <div id="courses-page" class="page">
+        <button class="back-btn" onclick="showPage('main-page')">← Back to Main</button>
+        
+        <div class="container">
+            <div class="content-card">
+                <h2>📚 Available Courses with Duration & Benefits</h2>
+                <p style="margin-bottom: 30px; color: var(--deep-blue); font-size: 1.1em;">Explore our comprehensive technical training programs designed for East African professionals.</p>
+                
+                <div class="course-grid">
+                    <div class="course-card">
+                        <h4>💻 Computer Programming</h4>
+                        <div style="background: var(--orange); color: white; padding: 8px; border-radius: 10px; margin: 15px 0;">3 Months Course</div>
+                        <p>Website & App Development, Software Engineering, Database Management</p>
+                        <p><strong>Earn:</strong> 200 Kabiru Points</p>
+                        <p><strong>Price:</strong> Coming Soon</p>
+                        <button class="btn" style="margin-top: 15px;">Enroll Now</button>
+                    </div>
+                    <div class="course-card">
+                        <h4>🪚 Carpentry & Woodwork</h4>
+                        <div style="background: var(--orange); color: white; padding: 8px; border-radius: 10px; margin: 15px 0;">6+ Months Course</div>
+                        <p>Furniture, Interior Fitting, Gypsum Work</p>
+                        <p><strong>Earn:</strong> 280 Kabiru Points</p>
+                        <p><strong>Price:</strong> Coming Soon</p>
+                        <button class="btn" style="margin-top: 15px;">Enroll Now</button>
+                    </div>
+                    <div class="course-card">
+                        <h4>💰 Finance & Banking</h4>
+                        <div style="background: var(--orange); color: white; padding: 8px; border-radius: 10px; margin: 15px 0;">3 Months Course</div>
+                        <p>Accounting, Business Commerce, Law</p>
+                        <p><strong>Earn:</strong> 250 Kabiru Points</p>
+                        <p><strong>Price:</strong> Coming Soon</p>
+                        <button class="btn" style="margin-top: 15px;">Enroll Now
+                        <button class="btn" style="margin-top: 15px;">Enroll Now
+</button>
+                    </div>
+                    <div class="course-card">
+                        <h4>🔌 Electronics & Electrical</h4>
+                        <div style="background: var(--orange); color: white; padding: 8px; border-radius: 10px; margin: 15px 0;">6+ Months Course</div>
+                        <p>Installation, Repair & Maintenance of Electronics</p>
+                        <p><strong>Earn:</strong> 300 Kabiru Points</p>
+                        <p><strong>Price:</strong> Coming Soon</p>
+                        <button class="btn" style="margin-top: 15px;">Enroll Now</button>
+                    </div>
+                    <div class="course-card">
+                        <h4>👔 Textile & Tailoring</h4>
+                        <div style="background: var(--orange); color: white; padding: 8px; border-radius: 10px; margin: 15px 0;">3 Months Course</div>
+                        <p>Dress Making, Shirts, Safety Equipment</p>
+                        <p><strong>Earn:</strong> 180 Kabiru Points</p>
+                        <p><strong>Price:</strong> Coming Soon</p>
+                        <button class="btn" style="margin-top: 15px;">Enroll Now</button>
+                    </div>
+                    <div class="course-card">
+                        <h4>🎵 Music Instruments</h4>
+                        <div style="background: var(--orange); color: white; padding: 8px; border-radius: 10px; margin: 15px 0;">1 Month Course</div>
+                        <p>Piano, Guitar, Drums, Music Theory</p>
+                        <p><strong>Earn:</strong> 120 Kabiru Points</p>
+                        <p><strong>Price:</strong> Coming Soon
+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Dashboard Page -->
+    <div id="student-dashboard-page" class="page">
+        <button class="back-btn" onclick="showPage('main-page')">← Back to Main</button>
+        
+        <div class="container">
+            <div class="content-card">
+                <h2>📊 Student Dashboard</h2>
+                
+                <div id="student-login-required" style="text-align: center; padding: 40px;">
+                    <h3>🔐 Authentication Required</h3>
+                    <p>Please login through the main portal to access your student dashboard.</p>
+                    <button class="btn" onclick="showPage('login-page')">Go to Login</button>
+                </div>
+
+                <div id="student-dashboard-content" style="display: none;">
+                    <div class="kabiru-info-box">
+                        <h3>🪙 Your Kabiru Points: <span id="studentKabiruPoints">150</span></h3>
+                        <p>Earn more points through course completion, referrals, and participation!</p>
+                    </div>
+                    
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <h3>3</h3>
+                            <p>Enrolled Courses</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>85%</h3>
+                            <p>Average Progress</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>12</h3>
+                            <p>Completed Assignments</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>2</h3>
+                            <p>Upcoming Exams</p>
+                        </div>
+                    </div>
+
+                    <h3>📖 My Courses Library</h3>
+                    <div class="course-grid">
+                        <div class="course-card">
+                            <h4>Web Development Basics</h4>
+                            <div style="background: var(--orange); color: white; padding: 8px; border-radius: 10px; margin: 15px 0;">Progress: 75%</div>
+                            <p>Next: JavaScript Functions</p>
+                            <p><strong>Location:</strong> Nairobi Center</p>
+                            <button class="btn" style="margin-top: 15px;">Continue Learning</button>
+                        </div>
+                        <div class="course-card">
+                            <h4>Electronics Repair</h4>
+                            <div style="background: var(--orange); color: white; padding: 8px; border-radius: 10px; margin: 15px 0;">Progress: 60%</div>
+                            <p>Next: Circuit Analysis</p>
+                            <p><strong>Location:</strong> Online + Mombasa Lab</p>
+                            <button class="btn" style="margin-top: 15px;">Continue Learning</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teacher Dashboard Page -->
+    <div id="teacher-dashboard-page" class="page">
+        <button class="back-btn" onclick="showPage('main-page')">← Back to Main</button>
+        
+        <div class="container">
+            <div class="content-card">
+                <h2>👨‍🏫 Teacher Dashboard</h2>
+                
+                <div id="teacher-login-required" style="text-align: center; padding: 40px;">
+                    <h3>🔐 Authentication Required</h3>
+                    <p>Please login through the main portal to access your teacher dashboard.</p>
+                    <button class="btn" onclick="showPage('login-page')">Go to Login</button>
+                </div>
+
+                <div id="teacher-dashboard-content" style="display: none;">
+                    <div class="kabiru-info-box">
+                        <h3>🪙 Your Kabiru Points: <span id="teacherKabiruPoints">750</span></h3>
+                        <p>Earned through teaching, student onboarding, and networking!</p>
+                    </div>
+
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <h3>24</h3>
+                            <p>Active Students</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>5</h3>
+                            <p>Courses Teaching</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>92%</h3>
+                            <p>Student Pass Rate</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>18</h3>
+                            <p>Referrals Made</p>
+                        </div>
+                    </div>
+
+                    <h3>📚 Teaching Materials Management</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0;">
+                        <button class="btn">Upload Notes (+10 Kabiru)</button>
+                        <button class="btn">Create Exam (+15 Kabiru)</button>
+                        <button class="btn">Manage Assignments (+8 Kabiru)</button>
+                        <button class="btn">Student Grades (+12 Kabiru)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Investor Dashboard Page -->
+    <div id="investor-dashboard-page" class="page">
+        <button class="back-btn" onclick="showPage('main-page')">← Back to Main</button>
+        
+        <div class="container">
+            <div class="content-card">
+                <h2>💰 Investor Dashboard</h2>
+                
+                <div id="investor-login-required" style="text-align: center; padding: 40px;">
+                    <h3>🔐 Authentication Required</h3>
+                    <p>Please login through the main portal to access your investor dashboard.</p>
+                    <button class="btn" onclick="showPage('login-page')">Go to Login</button>
+                </div>
+
+                <div id="investor-dashboard-content" style="display: none;">
+                    <div class="kabiru-info-box">
+                        <h3>💎 Investment Status: <span id="investorClass">Gold Benefactor</span></h3>
+                        <p>Total Investment: <strong>$15,000</strong> | Kabiru Points Earned: <span id="investorKabiruPoints">2,450</span></p>
+                        <p>Students Sponsored: <strong>24</strong> | Graduation Rate: <strong>89%</strong></p>
+                    </div>
+
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <h3>24</h3>
+                            <p>Students Sponsored</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>89%</h3>
+                            <p>Success Rate</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>8</h3>
+                            <p>Programs Funded</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>156</h3>
+                            <p>Equipment Purchased</p>
+                        </div>
+                    </div>
+
+                    <h3>📊 Investment Impact Tracking</h3>
+                    <div class="course-grid">
+                        <div class="course-card">
+                            <h4>Programming Course Fund</h4>
+                            <div style="background: var(--orange); color: white; padding: 8px; border-radius: 10px; margin: 15px 0;">$4,500 Invested</div>
+                            <p>12 Students Enrolled | 10 Graduated</p>
+                            <p><strong>ROI:</strong> 83% Success Rate</p>
+                            <p><strong>Location:</strong> Nairobi Center</p>
+                            <button class="btn" style="margin-top: 15px;">View Details</button>
+                        </div>
+                        <div class="course-card">
+                            <h4>Electronics Lab Equipment</h4>
+                            <div style="background: var(--orange); color: white; padding: 8px; border-radius: 10px; margin: 15px 0;">$6,200 Invested</div>
+                            <p>Equipment Status: 95% Operational</p>
+                            <p><strong>Impact:</strong> 45 Students Served</p>
+                            <p><strong>Location:</strong> Mombasa Center</p>
+                            <button class="btn" style="margin-top: 15px;">Track Usage</button>
+                        </div>
+                        <div class="course-card">
+                            <h4>Scholarship Program</h4>
+                            <div style="background: var(--orange); color: white; padding: 8px; border-radius: 10px; margin: 15px 0;">$4,300 Invested</div>
+                            <p>8 Full Scholarships Awarded</p>
+                            <p><strong>Beneficiaries:</strong> 6 Active, 2 Graduated</p>
+                            <p><strong>Focus:</strong> Underprivileged Youth</p>
+                            <button class="btn" style="margin-top: 15px;">Meet Scholars</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Library Page -->
+    <div id="library-page" class="page">
+        <button class="back-btn" onclick="showPage('main-page')">← Back to Main</button>
+        
+        <div class="container">
+            <div class="content-card">
+                <h2>📚 Public Library Resources</h2>
+                <p style="margin-bottom: 30px; color: var(--deep-blue); font-size: 1.1em;">Access digital libraries and educational resources while earning Kabiru points.</p>
+                
+                <div class="course-grid">
+                    <div class="course-card">
+                        <h4>Kenya National Library</h4>
+                        <p>Access to digital books, journals, and research materials</p>
+                        <p><strong>Earn:</strong> 5 Kabiru Points per hour</p>
+                        <button class="btn" style="margin-top: 15px;">Access Library</button>
+                    </div>
+                    <div class="course-card">
+                        <h4>Technical Reference Materials</h4>
+                        <p>Engineering handbooks, programming documentation, trade manuals</p>
+                        <p><strong>Earn:</strong> 3 Kabiru Points per download</p>
+                        <button class="btn" style="margin-top: 15px;">Browse Collection</button>
+                    </div>
+                    <div class="course-card">
+                        <h4>Open Educational Resources</h4>
+                        <p>MIT OpenCourseWare, Khan Academy, Coursera Public Content</p>
+                        <p><strong>Earn:</strong> 8 Kabiru Points per module</p>
+                        <button class="btn" style="margin-top: 15px;">Explore Resources</button>
+                    </div>
+                    <div class="course-card">
+                        <h4>Industry Standards Database</h4>
+                        <p>NiTA standards, international certifications, trade regulations</p>
+                        <p><strong>Earn:</strong> 10 Kabiru Points per study</p>
+                        <button class="btn" style="margin-top: 15px;">View Standards</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Referral Page -->
+    <div id="referral-page" class="page">
+        <button class="back-btn" onclick="showPage('main-page')">← Back to Main</button>
+        
+        <div class="container">
+            <div class="content-card">
+                <h2>🔗 Kabiru Points Referral System</h2>
+                <p style="margin-bottom: 30px; color: var(--deep-blue); font-size: 1.1em;">Build your network and create a sustainable income through the Kabiru mining system.</p>
+                
+                <div class="kabiru-info-box">
+                    <h3>🪙 Your Total Kabiru Points: <span id="totalKabiruPoints">425</span></h3>
+                    <p><strong>This is your MAIN online business opportunity!</strong> Points from referrals, activities, and mining can pay for everything!</p>
+                </div>
+
+                <div class="referral-levels">
+                    <h3>🎯 Your Personal Referral Link</h3>
+                    <p style="margin-bottom: 15px;">Share this link to earn 50 Kabiru points for each person who registers!</p>
+                    <div id="referralLinkDisplay" style="background: var(--black); color: white; padding: 15px; border-radius: 10px; font-family: monospace; word-break: break-all; margin: 10px 0; font-size: 14px;">
+                        Login to get your personalized referral link
+                    </div>
+                    <button class="btn" onclick="copyUserReferralLink()" id="copyReferralBtn" disabled>📋 Copy Your Referral Link</button>
+                    
+                    <div id="referralStats" style="margin-top: 20px; display: none;">
+                        <h4>📈 Your Referral Performance</h4>
+                        <div class="dashboard-stats">
+                            <div class="stat-card">
+                                <h3 id="totalReferrals">0</h3>
+                                <p>Total Referrals</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3 id="referralEarnings">0</h3>
+                                <p>Kabiru Points Earned</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3 id="activeReferrals">0</h3>
+                                <p>Active Members</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3 id="monthlyGrowth">0%</h3>
+                                <p>Monthly Growth</p>
+                            </div>
+                        </div>
+                        
+                        <div id="recentReferrals" style="margin-top: 20px;">
+                            <h4>Recent Referrals</h4>
+                            <div id="referralsList" style="background: rgba(255,255,255,0.9); padding: 15px; border-radius: 10px; margin-top: 10px;">
+                                No referrals yet. Start sharing your link!
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 style="margin-top: 25px;">💰 5-Level Referral Rewards Structure</h3>
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <h3>50</h3>
+                            <p>Points per Level 1 Referral</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>25</h3>
+                            <p>Points per Level 2 Referral</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>15</h3>
+                            <p>Points per Level 3 Referral</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>10</h3>
+                            <p>Points per Level 4 Referral</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>5</h3>
+                            <p>Points per Level 5 Referral</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification System -->
+    <div id="notification" class="notification"></div>
+
+    <script>
+        // In-memory storage system (no localStorage dependency)
+        var appState = {
+            currentUser: null,
+            currentPage: 'login-page',
+            users: { students: [], teachers: [], investors: [] },
+            kabiruTracking: {},
+            referralNetwork: {},
+            pendingReferralCode: null
+        };
+
+        // Real User Management System
+        function generateReferralCode(userId, userType) {
+            var prefix = userType.toUpperCase().substring(0, 3);
+            var timestamp = Date.now().toString(36);
+            var random = Math.random().toString(36).substring(2, 8);
+            return prefix + '_' + timestamp + '_' + random;
+        }
+
+        function generateRealReferralLink(referralCode) {
+            var currentUrl = window.location.href.split('?')[0];
+            return currentUrl + '?ref=' + referralCode;
+        }
+
+        function processReferral(referralCode, newUserId) {
+            if (!referralCode || !newUserId) return 0;
+            
+            // Find referrer in all user types
+            var referrer = null;
+            
+            for (var type in appState.users) {
+                var users = appState.users[type];
+                for (var i = 0; i < users.length; i++) {
+                    if (users[i].referralCode === referralCode) {
+                        referrer = users[i];
+                        break;
+                    }
+                }
+                if (referrer) break;
+            }
+            
+            if (referrer) {
+                // Initialize referral network if doesn't exist
+                if (!appState.referralNetwork[referralCode]) {
+                    appState.referralNetwork[referralCode] = {
+                        referrerId: referrer.id,
+                        referrerName: referrer.fullName,
+                        level1: [],
+                        totalEarned: 0
+                    };
+                }
+                
+                // Add new referral
+                appState.referralNetwork[referralCode].level1.push({
+                    userId: newUserId,
+                    joinDate: new Date().toISOString(),
+                    pointsGenerated: 50
+                });
+                
+                // Award points to referrer
+                var bonusPoints = 50;
+                appState.referralNetwork[referralCode].totalEarned += bonusPoints;
+                
+                if (referrer.id) {
+                    referrer.kabiruPoints = (referrer.kabiruPoints || 0) + bonusPoints;
+                }
+                
+                return 25; // Bonus for the new user
+            }
+            
+            return 0;
+        }
+
+        // Kabiru Points Tracking System
+        function trackKabiruActivity(userId, activity, points) {
+            if (!appState.kabiruTracking[userId]) {
+                appState.kabiruTracking[userId] = {
+                    totalPoints: 0,
+                    activities: [],
+                    dailyMining: 0,
+                    referralEarnings: 0
+                };
+            }
+            
+            appState.kabiruTracking[userId].activities.push({
+                activity: activity,
+                points: points,
+                timestamp: new Date().toISOString()
+            });
+            
+            appState.kabiruTracking[userId].totalPoints += points;
+            
+            return appState.kabiruTracking[userId].totalPoints;
+        }
+
+        function getKabiruBalance(userId) {
+            if (appState.kabiruTracking[userId]) {
+                return appState.kabiruTracking[userId].totalPoints;
+            }
+            return 0;
+        }
+
+        // Check for referral code in URL on page load
+        function checkUrlReferral() {
+            try {
+                var urlParams = new URLSearchParams(window.location.search);
+                var refCode = urlParams.get('ref');
+                if (refCode) {
+                    appState.pendingReferralCode = refCode;
+                    showNotification('Referral code detected! Register now to earn bonus Kabiru points.');
+                    
+                    // Clean URL without refreshing
+                    if (window.history && window.history.pushState) {
+                        var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                        window.history.pushState({path: newUrl}, '', newUrl);
+                    }
+                }
+            } catch (e) {
+                console.warn('URL processing error:', e);
+            }
+        }
+
+        // Page Navigation System
+        function showPage(pageId) {
+            // Hide all pages
+            var pages = document.querySelectorAll('.page');
+            pages.forEach(function(page) {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            appState.currentPage = pageId;
+            
+            // Update back button visibility
+            updateBackButton(pageId);
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function updateBackButton(pageId) {
+            var backBtns = document.querySelectorAll('.back-btn');
+            backBtns.forEach(function(btn) {
+                btn.style.display = pageId === 'login-page' ? 'none' : 'block';
+            });
+        }
+
+        // Enhanced Authentication System (No demo accounts)
+        function authenticateUser(email, password, accountType) {
+            // Only check registered users
+            var userArray = accountType === 'student' ? appState.users.students : 
+                           accountType === 'teacher' ? appState.users.teachers : 
+                           appState.users.investors;
+            
+            var user = userArray.find(function(u) { 
+                return u.email === email && u.password === password; 
+            });
+            
+            if (user) {
+                // Get real-time Kabiru balance
+                var realBalance = getKabiruBalance(user.id) || user.kabiruPoints || 0;
+                
+                return {
+                    success: true,
+                    user: {
+                        id: user.id,
+                        email: user.email,
+                        name: user.fullName,
+                        type: accountType,
+                        kabiruPoints: realBalance,
+                        investorClass: user.investorClass || null,
+                        totalInvestment: user.totalInvestment || null,
+                        referralCode: user.referralCode
+                    }
+                };
+            }
+            
+            return { success: false, message: 'Invalid credentials. Please check your email and password or register first.' };
+        }
+
+        // Real Registration System
+        function registerUser(userData, userType) {
+            var userId = userType.toUpperCase() + '_' + Date.now();
+            var referralCode = generateReferralCode(userId, userType);
+            var pendingReferralCode = appState.pendingReferralCode;
+            
+            // Base Kabiru points
+            var basePoints = userType === 'student' ? 50 : userType === 'teacher' ? 100 : 500;
+            
+            // Process referral bonus
+            var referralBonus = 0;
+            if (pendingReferralCode) {
+                referralBonus = processReferral(pendingReferralCode, userId);
+                appState.pendingReferralCode = null;
+            }
+            
+            var totalPoints = basePoints + referralBonus;
+            
+            // Create user object
+            var newUser = {
+                id: userId,
+                email: userData.email,
+                fullName: userData.fullName,
+                password: userData.password,
+                referralCode: referralCode,
+                kabiruPoints: totalPoints,
+                registrationDate: new Date().toISOString(),
+                status: 'active'
+            };
+            
+            // Add type-specific data
+            if (userType === 'investor') {
+                newUser.investorClass = getInvestorClass(userData.investmentAmount);
+                newUser.totalInvestment = userData.totalInvestment || 0;
+                if (userData.investmentAmount) {
+                    newUser.kabiruPoints = getInvestorKabiruBonus(userData.investmentAmount);
+                }
+            }
+            
+            // Add to appropriate array
+            if (userType === 'student') {
+                appState.users.students.push(newUser);
+            } else if (userType === 'teacher') {
+                appState.users.teachers.push(newUser);
+            } else if (userType === 'investor') {
+                appState.users.investors.push(newUser);
+            }
+            
+            // Track initial Kabiru points
+            trackKabiruActivity(userId, 'Registration Bonus', totalPoints);
+            
+            return {
+                success: true,
+                user: newUser,
+                referralBonus: referralBonus,
+                message: referralBonus > 0 ? 
+                    'Registration successful! You earned ' + totalPoints + ' Kabiru points (' + basePoints + ' welcome + ' + referralBonus + ' referral bonus)!' :
+                    'Registration successful! You earned ' + basePoints + ' Kabiru points!'
+            };
+        }
+
+        // Enhanced Notification System
+        function showNotification(message, type) {
+            type = type || 'success';
+            var notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            
+            if (type === 'error') {
+                notification.style.background = 'linear-gradient(135deg, #ff4444, var(--orange))';
+            } else {
+                notification.style.background = 'linear-gradient(135deg, var(--orange), var(--sky-blue))';
+            }
+            
+            setTimeout(function() {
+                notification.style.display = 'none';
+            }, 4000);
+        }
+
+        // Helper Functions for Investor System
+        function getInvestorClass(investmentLevel) {
+            var classes = {
+                'bronze': 'Bronze Sponsor',
+                'silver': 'Silver Partner',
+                'gold': 'Gold Benefactor',
+                'platinum': 'Platinum Patron',
+                'diamond': 'Diamond Visionary'
+            };
+            return classes[investmentLevel] || 'Bronze Sponsor';
+        }
+
+        function getInvestorKabiruBonus(investmentLevel) {
+            var bonuses = {
+                'bronze': 500,
+                'silver': 1500,
+                'gold': 5000,
+                'platinum': 15000,
+                'diamond': 50000
+            };
+            return bonuses[investmentLevel] || 500;
+        }
+
+        function updateInvestorClass(investmentLevel) {
+            var className = getInvestorClass(investmentLevel);
+            showNotification('Selected: ' + className + ' - Earn ' + getInvestorKabiruBonus(investmentLevel) + ' Kabiru points!');
+        }
+
+        // Login Form Handler
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                var email = document.getElementById('loginEmail').value;
+                var password = document.getElementById('loginPassword').value;
+                var accountType = this.accountType.value;
+                
+                if (!email || !password || !accountType) {
+                    showNotification('Please fill in all fields', 'error');
+                    return;
+                }
+                
+                var authResult = authenticateUser(email, password, accountType);
+                
+                if (authResult.success) {
+                    appState.currentUser = authResult.user;
+                    showNotification('Welcome back, ' + authResult.user.name + '! Your dashboard is now active.');
+                    
+                    // Show appropriate dashboard content
+                    if (accountType === 'student') {
+                        document.getElementById('student-login-required').style.display = 'none';
+                        document.getElementById('student-dashboard-content').style.display = 'block';
+                        document.getElementById('studentKabiruPoints').textContent = authResult.user.kabiruPoints;
+                    } else if (accountType === 'teacher') {
+                        document.getElementById('teacher-login-required').style.display = 'none';
+                        document.getElementById('teacher-dashboard-content').style.display = 'block';
+                        document.getElementById('teacherKabiruPoints').textContent = authResult.user.kabiruPoints;
+                    } else if (accountType === 'investor') {
+                        document.getElementById('investor-login-required').style.display = 'none';
+                        document.getElementById('investor-dashboard-content').style.display = 'block';
+                        document.getElementById('investorKabiruPoints').textContent = authResult.user.kabiruPoints;
+                        if (authResult.user.investorClass) {
+                            document.getElementById('investorClass').textContent = authResult.user.investorClass;
+                        }
+                    }
+                    
+                    // Update referral display on login
+                    updateReferralDisplay();
+                    
+                    showPage('main-page');
+                } else {
+                    showNotification(authResult.message || 'Login failed. Please check your credentials.', 'error');
+                }
+            });
+        });
+
+        // Enhanced Referral Link Functions
+        function copyUserReferralLink() {
+            if (!appState.currentUser || !appState.currentUser.referralCode) {
+                showNotification('Please login to get your referral link.', 'error');
+                return;
+            }
+            
+            var referralLink = generateRealReferralLink(appState.currentUser.referralCode);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(referralLink).then(function() {
+                    showNotification('Your personal referral link copied! Share it to earn 50 Kabiru points per referral!');
+                }).catch(function() {
+                    fallbackCopy(referralLink);
+                });
+            } else {
+                fallbackCopy(referralLink);
+            }
+        }
+
+        function fallbackCopy(text) {
+            var textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showNotification('Referral link copied! Share it to start earning!');
+        }
+
+        function updateReferralDisplay() {
+            if (appState.currentUser && appState.currentUser.referralCode) {
+                var referralLink = generateRealReferralLink(appState.currentUser.referralCode);
+                document.getElementById('referralLinkDisplay').textContent = referralLink;
+                document.getElementById('copyReferralBtn').disabled = false;
+                document.getElementById('copyReferralBtn').textContent = '📋 Copy Your Personal Referral Link';
+                
+                // Show referral stats
+                var statsElement = document.getElementById('referralStats');
+                if (statsElement) {
+                    statsElement.style.display = 'block';
+                    updateReferralStats();
+                }
+            } else {
+                document.getElementById('referralLinkDisplay').textContent = 'Login to get your personalized referral link';
+                document.getElementById('copyReferralBtn').disabled = true;
+            }
+        }
+
+        function updateReferralStats() {
+            if (!appState.currentUser) return;
+            
+            var userReferralData = appState.referralNetwork[appState.currentUser.referralCode];
+            
+            if (userReferralData) {
+                document.getElementById('totalReferrals').textContent = userReferralData.level1.length || 0;
+                document.getElementById('referralEarnings').textContent = userReferralData.totalEarned || 0;
+                document.getElementById('activeReferrals').textContent = userReferralData.level1.length || 0;
+                
+                // Update recent referrals list
+                var referralsList = document.getElementById('referralsList');
+                if (userReferralData.level1.length > 0) {
+                    var recentReferralsHtml = '';
+                    var recentRefs = userReferralData.level1.slice(-3).reverse(); // Show last 3
+                    
+                    recentRefs.forEach(function(ref) {
+                        var joinDate = new Date(ref.joinDate).toLocaleDateString();
+                        recentReferralsHtml += '<div style="padding: 10px; margin: 5px 0; background: #f0f0f0; border-radius: 8px; border-left: 4px solid var(--orange);">';
+                        recentReferralsHtml += '<strong>New Member:</strong> ' + ref.userId + '<br>';
+                        recentReferralsHtml += '<small>Joined: ' + joinDate + ' | Earned: ' + ref.pointsGenerated + ' Kabiru Points</small>';
+                        recentReferralsHtml += '</div>';
+                    });
+                    
+                    referralsList.innerHTML = recentReferralsHtml;
+                } else {
+                    referralsList.innerHTML = 'No referrals yet. Start sharing your link!';
+                }
+            } else {
+                // Initialize empty stats
+                document.getElementById('totalReferrals').textContent = '0';
+                document.getElementById('referralEarnings').textContent = '0';
+                document.getElementById('activeReferrals').textContent = '0';
+                document.getElementById('monthlyGrowth').textContent = '0%';
+            }
+        }
+
+        // Enhanced Mining Simulation with Real Tracking
+        function simulateMining() {
+            if (appState.currentUser) {
+                var pointsGained = Math.floor(Math.random() * 3) + 1;
+                var newBalance = trackKabiruActivity(appState.currentUser.id, 'Daily Mining', pointsGained);
+                appState.currentUser.kabiruPoints = newBalance;
+                
+                // Update all Kabiru displays
+                var displays = document.querySelectorAll('#studentKabiruPoints, #teacherKabiruPoints, #totalKabiruPoints, #investorKabiruPoints');
+                displays.forEach(function(display) {
+                    if (display) {
+                        display.textContent = newBalance;
+                    }
+                });
+                
+                // Update referral stats if on referral page
+                if (appState.currentPage === 'referral-page') {
+                    updateReferralStats();
+                }
+                
+                // Occasional notification
+                if (Math.random() < 0.1) {
+                    showNotification('Mining reward: +' + pointsGained + ' Kabiru points! Total: ' + newBalance);
+                }
+            }
+        }
+
+        // Course Enrollment Handler
+        document.addEventListener('click', function(e) {
+            if (e.target.textContent === 'Enroll Now' || e.target.textContent.indexOf('Enroll Now') !== -1) {
+                if (!appState.currentUser) {
+                    showNotification('Please login first to enroll in courses.', 'error');
+                    showPage('login-page');
+                } else {
+                    showNotification('Course enrollment will be available once pricing is finalized!');
+                }
+            }
+        });
+
+        function forgotPassword() {
+            showNotification('Password reset feature coming soon! Contact admin for assistance.');
+        }
+
+        // Form toggle functionality
+        function setupFormToggle() {
+            var showLoginBtn = document.getElementById('showLoginBtn');
+            var showRegisterBtn = document.getElementById('showRegisterBtn');
+            var loginForm = document.getElementById('loginForm');
+            var registerForm = document.getElementById('registerForm');
+            
+            showLoginBtn.addEventListener('click', function() {
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+                showLoginBtn.classList.add('active');
+                showRegisterBtn.classList.remove('active');
+            });
+            
+            showRegisterBtn.addEventListener('click', function() {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+                showRegisterBtn.classList.add('active');
+                showLoginBtn.classList.remove('active');
+            });
+        }
+
+        // Dynamic form fields based on account type
+        function setupDynamicFields() {
+            var accountTypeSelect = document.getElementById('registerAccountType');
+            var studentFields = document.getElementById('studentFields');
+            var teacherFields = document.getElementById('teacherFields');
+            var investorFields = document.getElementById('investorFields');
+            
+            accountTypeSelect.addEventListener('change', function() {
+                var selectedType = this.value;
+                
+                // Hide all fields first
+                studentFields.style.display = 'none';
+                teacherFields.style.display = 'none';
+                investorFields.style.display = 'none';
+                
+                // Show relevant fields
+                if (selectedType === 'student') {
+                    studentFields.style.display = 'block';
+                } else if (selectedType === 'teacher') {
+                    teacherFields.style.display = 'block';
+                } else if (selectedType === 'investor') {
+                    investorFields.style.display = 'block';
+                }
+            });
+        }
+
+        // Registration Form Handler
+        function setupRegistrationForm() {
+            document.getElementById('registerForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                var formData = new FormData(this);
+                var userData = {};
+                for (var pair of formData.entries()) {
+                    userData[pair[0]] = pair[1];
+                }
+                
+                // Validate password confirmation
+                if (userData.password !== userData.confirmPassword) {
+                    showNotification('Passwords do not match. Please try again.', 'error');
+                    return;
+                }
+                
+                // Validate password strength
+                if (userData.password.length < 6) {
+                    showNotification('Password must be at least 6 characters long.', 'error');
+                    return;
+                }
+                
+                // Check if email already exists
+                var accountType = userData.accountType;
+                var existingUser = null;
+                
+                if (accountType === 'student') {
+                    existingUser = appState.users.students.find(function(user) {
+                        return user.email === userData.email;
+                    });
+                } else if (accountType === 'teacher') {
+                    existingUser = appState.users.teachers.find(function(user) {
+                        return user.email === userData.email;
+                    });
+                } else if (accountType === 'investor') {
+                    existingUser = appState.users.investors.find(function(user) {
+                        return user.email === userData.email;
+                    });
+                }
+                
+                if (existingUser) {
+                    showNotification('Email already registered. Please use a different email or login.', 'error');
+                    return;
+                }
+                
+                // Remove confirmPassword from userData before saving
+                delete userData.confirmPassword;
+                
+                // Process referral code if provided
+                if (userData.referralCode) {
+                    appState.pendingReferralCode = userData.referralCode;
+                }
+                
+                var result = registerUser(userData, accountType);
+                
+                if (result.success) {
+                    showNotification(result.message + ' You can now login with your credentials!');
+                    this.reset();
+                    
+                    // Switch to login form
+                    document.getElementById('loginForm').style.display = 'block';
+                    document.getElementById('registerForm').style.display = 'none';
+                    document.getElementById('showLoginBtn').classList.add('active');
+                    document.getElementById('showRegisterBtn').classList.remove('active');
+                    
+                    // Pre-fill email in login form
+                    document.getElementById('loginEmail').value = result.user.email;
+                    
+                    setTimeout(function() {
+                        showNotification('Please login with your email and password to access your dashboard.');
+                    }, 2000);
+                } else {
+                    showNotification('Registration failed. Please try again.', 'error');
+                }
+            });
+        }
+
+        // Start mining simulation every 60 seconds
+        setInterval(simulateMining, 60000);
+
+        // Initialize the application with URL referral check
+        document.addEventListener('DOMContentLoaded', function() {
+            checkUrlReferral();
+            showNotification('Welcome to TACEP Education Services! Please create an account or login to access your dashboard.');
+            showPage('login-page');
+            
+            // Update referral display
+            updateReferralDisplay();
+            
+            // Setup form toggle functionality
+            setupFormToggle();
+            
+            // Setup dynamic form fields
+            setupDynamicFields();
+            
+            // Setup registration form
+            setupRegistrationForm();
+        });
+
+        // Update referral display when switching to referral page
+        var originalShowPage = showPage;
+        showPage = function(pageId) {
+            originalShowPage(pageId);
+            if (pageId === 'referral-page') {
+                updateReferralDisplay();
+            }
+        };
+
+        // Mobile responsiveness
+        function adjustForMobile() {
+            if (window.innerWidth <= 768) {
+                document.querySelectorAll('.course-grid, .nav-buttons, .dashboard-stats').forEach(function(grid) {
+                    if (grid.classList.contains('nav-buttons')) {
+                        grid.style.gridTemplateColumns = '1fr';
+                    } else if (grid.classList.contains('dashboard-stats')) {
+                        grid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+                    } else {
+                        grid.style.gridTemplateColumns = '1fr';
+                    }
+                });
+            }
+        }
+
+        window.addEventListener('resize', adjustForMobile);
+        adjustForMobile();
+    </script>
+</body>
+    </html>
